@@ -1,5 +1,9 @@
 import { connection } from "./connection.js";
-import { valuesOfAuthors, valuesOfResearchPapers } from "./data.js";
+import {
+  valuesOfAuthors,
+  valuesOfResearchPapers,
+  valuesOfAuthorsResearches,
+} from "./data.js";
 
 //Create a table called research_Papers
 export const createResearchPapers = () => {
@@ -8,10 +12,8 @@ export const createResearchPapers = () => {
         paper_id TINYINT AUTO_INCREMENT, 
         paper_title VARCHAR(255), 
         conference VARCHAR(255), 
-        publish_date DATE, 
-        author_id TINYINT, 
-        PRIMARY KEY (paper_id), 
-        FOREIGN KEY (author_id) REFERENCES authors(author_id)
+        publish_date DATE,
+        PRIMARY KEY (paper_id)
     )`,
     (error, results) => {
       if (error) {
@@ -19,6 +21,27 @@ export const createResearchPapers = () => {
         throw error;
       }
       console.log("research_Papers table created");
+    }
+  );
+};
+
+//Create a table for Authors' Research Papers
+export const createAuthorsResearch = () => {
+  connection.query(
+    `CREATE TABLE authors_Researches (
+        id TINYINT AUTO_INCREMENT,  
+        author_id TINYINT, 
+        paper_id TINYINT,
+        PRIMARY KEY (id),
+        FOREIGN KEY (author_id) REFERENCES authors(author_id),
+        FOREIGN KEY (paper_id) REFERENCES research_Papers(paper_id)
+    )`,
+    (error, results) => {
+      if (error) {
+        console.log("authors_Researches table already exists");
+        throw error;
+      }
+      console.log("authors_Researches table created");
     }
   );
 };
@@ -48,8 +71,13 @@ export const insertData = () => {
   const insertSqlOfResearchPapers = `INSERT INTO research_Papers (
         paper_title, 
         conference, 
-        publish_date, 
-        author_id
+        publish_date
+    ) VALUES ?`;
+
+  //Sql query and values for authors_Researches table
+  const insertSqlOfAuthorsResearches = `INSERT INTO authors_Researches (
+        author_id, 
+        paper_id
     ) VALUES ?`;
 
   insertIntoTable("authors", insertSqlOfAuthors, valuesOfAuthors);
@@ -57,5 +85,10 @@ export const insertData = () => {
     "research_Papers",
     insertSqlOfResearchPapers,
     valuesOfResearchPapers
+  );
+  insertIntoTable(
+    "authors_Researches",
+    insertSqlOfAuthorsResearches,
+    valuesOfAuthorsResearches
   );
 };

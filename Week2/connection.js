@@ -1,6 +1,12 @@
 import mysql from "mysql";
 import { createAuthors, addMentor } from "./keys.js";
-import { createResearchPapers, insertData } from "./relationships.js";
+import {
+  createResearchPapers,
+  createAuthorsResearch,
+  insertData,
+} from "./relationships.js";
+import { getNamesAuthorsAndMentors, getPublishedPaper } from "./joins.js";
+import { executeSelectQueries } from "./aggregateFunctions.js";
 
 export const connection = mysql.createConnection({
   host: "localhost",
@@ -40,7 +46,15 @@ createAuthors();
 addMentor();
 //Create a table called research_Papers
 createResearchPapers();
+//Create a table for Authors' Research Papers
+createAuthorsResearch();
 //Insert data from data.js
 insertData();
+//select names of all authors and mentors
+getNamesAuthorsAndMentors();
+//select all columns of authors and their published paper_title
+getPublishedPaper();
+//execute select queries for Exercise 4: Aggregate Functions
+executeSelectQueries();
 
 connection.end();

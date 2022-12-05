@@ -23,170 +23,202 @@ export const valuesOfResearchPapers = [
     "Has big data changed our lives for the better?",
     "Broadband Talking Points",
     "1980-08-12",
-    7,
   ],
   [
     "Neural networks are algorithms that can learn to solve problems",
     "Zoom Mountain",
     "1995-07-13",
-    10,
   ],
   [
     "The current state of cryptography and how it may develop",
     "Millennial Babies",
     "1997-04-02",
-    4,
   ],
   [
     "The pros and cons of transitioning to cloud technologies",
     "Keys on Main",
     "1989-10-25",
-    13,
   ],
   [
     "What issues does automation raise, and how can they be solved?",
     "The National Chat",
     "2004-02-19",
-    1,
   ],
   [
     "Should we keep using multi-factor authentication?",
     "The Virtual Room",
     "2015-01-24",
-    15,
   ],
   [
     "Are big tech companies monopolistic in their behaviors?",
     "Remote Talks",
     "1996-11-13",
-    12,
   ],
   [
     "Is remote work the future of office jobs employment?",
     "The Golden Arch",
     "2014-12-08",
-    3,
   ],
   [
     "The pros and cons of software ownership vs. subscription models",
     "Online Sphere",
     "1993-01-26",
-    5,
   ],
   [
     "Explore the evolution of wireless communication standards and their implications",
     "The Digital Ninjas",
     "1999-09-19",
-    14,
   ],
   [
     "Describe the Internet of things and its effects on security",
     "It's 5 O'Clock World",
     "2013-05-14",
-    11,
   ],
   [
     "The issues of IPv4 and the adoption of IPv6",
     "Friends Of Central Perk",
     "2018-10-08",
-    2,
   ],
   [
     "How do computers manage to generate random numbers?",
     "The Virtual Gateway",
     "1988-12-02",
-    6,
   ],
   [
     "The infrastructure and contingencies of the World Wide Web",
     "The Chicago Sports Team",
     "1999-04-27",
-    9,
   ],
   [
     "Are computers entirely unbiased in their treatment of people?",
     "The Online Beliebers",
     "1984-10-04",
-    8,
   ],
-  [
-    "COVID-19's Effect on Medical Technology",
-    "The Vocal Arena",
-    "2007-09-27",
-    12,
-  ],
+  ["COVID-19's Effect on Medical Technology", "The Vocal Arena", "2007-09-27"],
   [
     "Online Education's Effect on Learning",
     "Torque Zoom Meeting Room",
     "1999-01-03",
-    7,
   ],
   [
     "Video Gaming as a Solution to World Problems",
     "Hipster Babies",
     "2017-08-22",
-    10,
   ],
   [
     "Children's Use of Technology and Social Media",
     "Online Work Culture",
     "2001-10-15",
-    4,
   ],
-  [
-    "The Pros and Cons of Human Cloning",
-    "The Palace of Harmony",
-    "1984-11-04",
-    13,
-  ],
+  ["The Pros and Cons of Human Cloning", "The Palace of Harmony", "1984-11-04"],
   [
     "The Implications of Human Identity Chips",
     "Virtual Coffee Meet Up",
     "1996-06-06",
-    1,
   ],
-  [
-    "Technology's Effect on Fertility",
-    "The Digital Conference",
-    "2016-08-21",
-    15,
-  ],
-  ["The Morality of Genetic Engineering", "Online Projects", "1994-11-18", 3],
-  ["Digital Voting Risks and Rewards", "Digital Ideas Hall", "2003-11-16", 5],
+  ["Technology's Effect on Fertility", "The Digital Conference", "2016-08-21"],
+  ["The Morality of Genetic Engineering", "Online Projects", "1994-11-18"],
+  ["Digital Voting Risks and Rewards", "Digital Ideas Hall", "2003-11-16"],
   [
     "Genetically Modified Food As a Solution to World Hunger",
     "Decisions HQ",
     "2013-02-23",
-    14,
   ],
   [
     "The effects of Artificial Intelligence on complex and tedious tasks",
     "The Rolling Scones",
     "1987-05-01",
-    11,
   ],
   [
     "What are the limitations to the study of computer architecture in colleges?",
     "Rocking Room",
     "2006-10-29",
-    2,
   ],
   [
     "What are the emerging fields of study in computer data science?",
     "The Thinking Space",
     "2020-12-19",
-    6,
   ],
   [
     "How is machine learning exposing students to more recent opportunities in life?",
     "Tune Arena",
     "2004-08-31",
-    9,
   ],
   [
     "How are marketers and promoters taking up software as a service?",
     "The Alpha Room",
     "1994-04-02",
-    8,
   ],
+];
+
+//[author_id, paper_id ]
+export const valuesOfAuthorsResearches = [
+  [11, 1],
+  [10, 13],
+  [4, 25],
+  [13, 7],
+  [1, 19],
+  [15, 21],
+  [12, 3],
+  [3, 15],
+  [5, 27],
+  [14, 9],
+  [11, 11],
+  [2, 23],
+  [6, 5],
+  [9, 17],
+  [8, 29],
+  [12, 2],
+  [3, 14],
+  [10, 26],
+  [4, 8],
+  [13, 10],
+  [1, 22],
+  [15, 4],
+  [3, 16],
+  [5, 28],
+  [14, 30],
+  [11, 12],
+  [2, 24],
+  [6, 6],
+  [9, 18],
+  [8, 20],
+  [7, 17],
+  [1, 17],
+  [3, 21],
+  [15, 5],
+  [13, 21],
+  [12, 24],
+];
+
+//[{request, selectQuery}...]
+export const selectQueriesData = [
+  {
+    request:
+      "1- All research papers and the number of authors that wrote that paper.",
+    selectQuery: `SELECT RP.paper_title, COUNT(AR.author_id) 
+    FROM research_Papers RP 
+    LEFT JOIN authors_Researches AR ON RP.paper_id = AR.paper_id 
+    GROUP BY RP.paper_title`,
+  },
+  {
+    request: "2- Sum of the research papers published by all female authors.",
+    selectQuery: `SELECT COUNT(*) AS SumPapersByFemale
+    FROM authors_Researches AR
+    INNER JOIN research_Papers RP ON RP.paper_id = AR.paper_id
+    INNER JOIN authors A ON A.author_id = AR.author_id AND A.gender = 'F'`,
+  },
+  {
+    request: "3- Average of the h-index of all authors per university.",
+    selectQuery: `select university, AVG(h_index) from authors group by university`,
+  },
+  {
+    request: "4- Sum of the research papers of the authors per university.",
+    selectQuery: `SELECT university, COUNT(ar.paper_id) FROM authors A INNER JOIN authors_researches AR ON A.author_id=AR.author_id GROUP BY university`,
+  },
+  {
+    request:
+      "5- Minimum and maximum of the h-index of all authors per university.",
+    selectQuery: `SELECT university, MAX(h_index), MIN(h_index) FROM authors GROUP BY university`,
+  },
 ];
