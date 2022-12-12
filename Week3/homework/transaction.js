@@ -1,4 +1,3 @@
-//Amount transferred from account number 1234 to account number 6789: 100
 import mysql from "mysql";
 
 const connection = mysql.createConnection({

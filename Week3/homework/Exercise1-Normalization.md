@@ -13,7 +13,7 @@
 
 2. What entities do you recognize that could be extracted?
 
-   - We can keep these columns in their own tables.
+   - We should keep the following columns in their own tables.
      - member_name, member_address, dinner_date, venue_description and food_description
 
 3. Name all the tables and columns that would make a 3NF compliant solution.
