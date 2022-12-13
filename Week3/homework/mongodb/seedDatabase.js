@@ -1,4 +1,4 @@
-const data = require("./data.json");
+import data from "./data.json" assert { type: "json" };
 
 /**
  * This function will drop and recreate the collection of sample data in our csv file.
@@ -6,7 +6,7 @@ const data = require("./data.json");
  *
  * @param {MongoClient} client - The client that is connected to your database
  */
-const seedDatabase = async (client) => {
+export const seedDatabase = async (client) => {
   const hasCollection = await client
     .db("databaseWeek3")
     .listCollections({ name: "bob_ross_episodes" })
@@ -44,8 +44,4 @@ const seedDatabase = async (client) => {
   } else {
     throw Error("The collection `bob_ross_episodes` does not exist!");
   }
-};
-
-module.exports = {
-  seedDatabase,
 };
