@@ -1,0 +1,38 @@
+[
+    {
+        "change_number": 1,
+        "amount": 1500,
+        "changed_date":{"$date":"2022-12-01"},
+        "remark":"from account number 100 to account number 102 for electricity"
+    },
+    {
+        "change_number": 2,
+        "amount": 2250,
+        "changed_date":{"$date":"2022-12-02"},
+        "remark":"from account number 103 to account number 102 for salary-December"
+    },
+    {
+        "change_number": 3,
+        "amount": 2700,
+        "changed_date":{"$date":"2022-12-08"},
+        "remark":"from account number 100 to account number 105 for lottery"
+    },
+    {
+        "change_number": 4,
+        "amount": 1100,
+        "changed_date":{"$date":"2022-12-08"},
+        "remark":"from account number 104 to account number 101 for cleaning supplies"
+    },
+    {
+        "change_number": 5,
+        "amount": 3350,
+        "changed_date":{"$date":"2022-12-10"},
+        "remark":"from account number 102 to account number 103 for salary-December"
+    },
+    {
+        "change_number": 6,
+        "amount": 1600,
+        "changed_date":{"$date":"2022-12-11"},
+        "remark":"from account number 100 to account number 105 for mobile phone"
+    }
+]
