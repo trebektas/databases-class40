@@ -32,50 +32,6 @@ connection.changeUser({ database: "transactions" }, (err) => {
   }
 });
 
-//Set autocommit
-export const setAutocommit = () => {
-  connection.query(`SET autocommit = 0`, (error, results) => {
-    if (error) {
-      console.log("auto-commit failed to set");
-      throw error;
-    }
-    console.log("auto-commit set");
-  });
-};
-
-//Start transaction
-export const startTransaction = () => {
-  connection.query(`START TRANSACTION`, (error, results) => {
-    if (error) {
-      console.log("transaction failed to start");
-      throw error;
-    }
-    console.log("transaction started");
-  });
-};
-
-//Commit
-export const commit = () => {
-  connection.query(`COMMIT`, (error, results) => {
-    if (error) {
-      console.log("commit failed");
-      throw error;
-    }
-    console.log("commit completed successfully");
-  });
-};
-
-//Rollback
-export const rollback = () => {
-  connection.query(`ROLLBACK`, (error, results) => {
-    if (error) {
-      console.log("rollback failed");
-      throw error;
-    }
-    console.log("rollback completed successfully");
-  });
-};
-
 //Create a table called account
 const createAccount = () => {
   connection.query(
@@ -115,13 +71,9 @@ const createAccountChanges = () => {
 };
 
 try {
-  setAutocommit();
-  startTransaction();
   createAccount();
   createAccountChanges();
-  commit();
 } catch (error) {
-  rollback();
   console.log(error);
 }
 

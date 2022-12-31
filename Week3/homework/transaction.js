@@ -30,25 +30,14 @@ export const startTransaction = () => {
   });
 };
 
-//Commit
-export const commit = () => {
-  connection.query(`COMMIT`, (error, results) => {
+//Commit & Rollback
+export const resultOfTransaction = (query) => {
+  connection.query(query, (error, results) => {
     if (error) {
-      console.log("commit failed");
+      console.log(`${query} failed`);
       throw error;
     }
-    console.log("commit completed successfully");
-  });
-};
-
-//Rollback
-export const rollback = () => {
-  connection.query(`ROLLBACK`, (error, results) => {
-    if (error) {
-      console.log("rollback failed");
-      throw error;
-    }
-    console.log("rollback completed successfully");
+    console.log(`${query} completed successfully`);
   });
 };
 
@@ -89,9 +78,9 @@ try {
   startTransaction();
   updateAccounts(1000, 101, 102);
   insertChangeLogs(1000, 101, 102);
-  commit();
+  resultOfTransaction("COMMIT");
 } catch (error) {
-  rollback();
+  resultOfTransaction("ROLLBACK");
   console.log(error);
 }
 
